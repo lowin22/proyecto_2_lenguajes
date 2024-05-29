@@ -19,13 +19,22 @@ function NavBar() {
                 <div className="mt-4 hidden lg:flex"> 
                 <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Home
-                     </Link>
-                     <Link href="/login" className="block px-4 py-2 text-white hover:bg-gray-700">
+                </Link>
+
+                <Link href="/login" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Login
-                     </Link>
-                     <Link href="/register" className="block px-4 py-2 text-white hover:bg-gray-700">
+                </Link>
+
+                <Link href="/register" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Register
-                     </Link>
+                </Link>
+
+                <Link href="/actualizarEmpresa" className="block px-4 py-2 text-white hover:bg-gray-700">
+
+                    Actualizar Empresa
+                
+                </Link>    
+                
                 </div>
                 <button className="block lg:hidden" onClick={toggleMenu}>
                     {menuOpen ? (

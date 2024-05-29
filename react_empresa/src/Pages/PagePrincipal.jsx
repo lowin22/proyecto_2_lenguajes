@@ -2,7 +2,9 @@
 
 function PagePrincipal() {
   return (
-    <div>PagePrincipal</div>
+    <div className="flex justify-center min-h-screen">
+      <h1>Mostrar todos los cupones (inhabilitados y activos)</h1>
+    </div>
   )
 }
 
