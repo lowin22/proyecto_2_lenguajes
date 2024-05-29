@@ -12,8 +12,8 @@ class CuponBusiness{
     public function getCupon($id){
         return $this->cuponData->getCupon($id);
     }
-    public function insertCupon($codigo, $descuento, $precio, $disponible, $empresa, $categoria, $imagen){
-        $cupon = new CuponModel(0, $codigo, $descuento, $precio, $disponible, $empresa, $categoria, $imagen);
+    public function insertCupon($codigo, $descuento, $precio, $disponible, $empresa, $categoria, $imagen, $fechaVencimiento){
+        $cupon = new CuponModel(0, $codigo, $descuento, $precio, $disponible, $empresa, $categoria, $imagen, $fechaVencimiento);
         return $this->cuponData->insertCupon($cupon);
     }
 }

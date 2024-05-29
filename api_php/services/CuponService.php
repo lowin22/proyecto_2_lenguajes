@@ -9,6 +9,6 @@ if(isset($_GET['id'])){
     echo json_encode($cupones);
 }
 if(isset($_POST['codigo'])){
-    $controller->insertCupon($_POST['codigo'], $_POST['descuento'], $_POST['precio'], $_POST['disponible'], $_POST['empresa'], $_POST['categoria'], $_POST['imagen']);
+    $controller->insertCupon($_POST['codigo'], $_POST['descuento'], $_POST['precio'], $_POST['disponible'], $_POST['empresa'], $_POST['categoria'], $_POST['imagen'], $_POST['fechaVencimiento']);
 }
 ?>
