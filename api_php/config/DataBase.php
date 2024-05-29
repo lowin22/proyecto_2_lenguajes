@@ -1,9 +1,9 @@
 <?php 
 class DataBase{
-    private $host = "localhost";
-    private $db_name = "proyecto_dos";
-    private $username = "root";
-    private $password = "";
+    private $host = "sql5.freesqldatabase.com";
+    private $db_name = "sql5710117";
+    private $username = "sql5710117";
+    private $password = "69GcGQclDP";
     public $conn;
     public function dbConnection(){
         $this->conn = null;
