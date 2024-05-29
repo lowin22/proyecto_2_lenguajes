@@ -29,3 +29,30 @@ create table tb_cupon (
 );
 alter table tb_cupon add constraint fk_categoria_cupon foreign key (categoria_cupon) references tb_categoria(id_categoria);
 alter table tb_cupon add constraint fk_empresa_cupon foreign key (empresa_cupon) references tb_empresa(id_empresa);
+
+insert into tb_categoria(nombre_categoria) values ('Comida');
+insert into tb_empresa(nombre_empresa, direccion_fisica_empresa, fecha_creacion_empresa, correo_empresa, telefono_emresa, password_empresa) 
+values ('McDonalds', 'Turrialba Centro', '2023-01-01', 'mcurrilaba@mc.com', '2222-2222', '1234');
+
+SELECT * FROM tb_cupon;
+
+CALL sp_getCupones();
+SELECT 
+    tb_cupon.id_cupon, 
+    tb_cupon.codigo_cupon, 
+    tb_cupon.descuento_cupon, 
+    tb_cupon.precio_cupon, 
+    tb_cupon.disponible_cupon, 
+    categoria.nombre_categoria, 
+    empresa.nombre_empresa, 
+    tb_cupon.imagen_cupon, 
+    tb_cupon.fecha_vencimiento_cupon 
+FROM 
+    tb_cupon 
+JOIN 
+   tb_categoria AS categoria 
+   ON tb_cupon.categoria_cupon = categoria.id_categoria
+JOIN 
+    tb_empresa AS empresa 
+    ON tb_cupon.empresa_cupon = empresa.id_empresa;
+select * from tb_categoria;
