@@ -3,14 +3,34 @@ import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import InputRegister from "../Components/InputRegister";
 import Button from "../Components/Button";
+import axios from "axios";
 
 function PageRegister() {
+  axios.defaults.baseURL = "http://127.0.0.1/api_php/services";
+axios.defaults.headers.post["Content-Type"] = "application/json";
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    toast.success("Registro exitoso");
-    reset();
+    async function postData() {
+      try {
+        const response = await axios.post("/AdmistrativoService.php", data);
+  
+        if (response.status !== 200) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const result = response.data;
+        console.log(result);
+        toast.success("Registro exitoso!");
+        reset();
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("Error en el registro");
+      }
+    }
+  
+    postData();
   });
+  
 
   return (
     <div className="flex justify-center min-h-screen">

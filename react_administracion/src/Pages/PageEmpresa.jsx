@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useRoute } from "wouter"
 import { useLocation } from "wouter"
 import { useState } from "react"
-import EmpresaView from "../Components/EmpresaView"
+import EmpresaEdit from "../Components/EmpresaEdit"
 import CuponView from "../Components/CuponView"
 
 function PageEmpresa() {
@@ -38,7 +38,7 @@ function PageEmpresa() {
       
 
       {empresa && (
-  <EmpresaView
+  <EmpresaEdit
     key={empresa.id_empresa}
     idEmpresa={empresa.id_empresa}
     nombre={empresa.nombre_empresa}
