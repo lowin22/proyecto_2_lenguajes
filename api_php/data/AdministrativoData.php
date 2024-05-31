@@ -8,6 +8,18 @@ class AdministrativoData{
         $db = $database->dbConnection();
         $this->conn = $db;
     }
+    public function getEmpresaById($id){
+        $stmt = $this->conn->prepare("call sp_getEmpresaById(:id)");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function getCuponesByIdEmpresa($id){
+        $stmt = $this->conn->prepare("call sp_getCuponIdEmpresa(:id)");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function getEmpresasActivas(){
         $stmt = $this->conn->prepare("call sp_getEmpresas()");
         $stmt->execute();
