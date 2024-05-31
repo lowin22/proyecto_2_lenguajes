@@ -3,15 +3,40 @@ import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import InputRegister from "../Components/InputRegister";
 import Button from "../Components/Button";
+import  axios  from "axios";
 
 function PageRegister() {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+<<<<<<< Updated upstream
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     toast.success("Registro exitoso");
     toast.error("Error al registrar");
 
     reset();
+=======
+  const onSubmit = handleSubmit( async (data) => {
+    var f = new FormData();
+    f.append("name", data.name);
+    f.append("direccion", data.direccion);
+    f.append("fecha", data.fecha);
+    f.append("correo", data.email);
+    f.append("telefono", data.telefono);
+    f.append("password", data.password);
+    f.append("cedula", data.card);
+    f.append("METHOD", "POST")
+    try {
+    
+      const response = await axios.post("http://127.0.0.1/api_php/services/AdmistrativoService.php",f);
+
+      console.log("Respuesta del servidor:", response.data);
+      toast.success("Registro exitoso");
+      reset();
+    } catch (error) {
+      toast.error("Error al registrar la empresa");
+      console.error("Error al enviar datos:", error);
+    }
+>>>>>>> Stashed changes
   });
 
   return (
