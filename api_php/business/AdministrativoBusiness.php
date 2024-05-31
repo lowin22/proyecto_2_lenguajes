@@ -9,6 +9,12 @@ class AdministrativoBusiness{
     public function getEmpresasActivas(){
         return $this->administrativoData->getEmpresasActivas();
     }
+    public function getEmpresaById($id){
+        return $this->administrativoData->getEmpresaById($id);
+    }
+    public function getCuponesByIdEmpresa($id){
+        return $this->administrativoData->getCuponesByIdEmpresa($id);
+    }
     public function insertEmpresa($nombre, $direccion, $fecha, $correo, $telefono, $password, $cedula){
         $empresa = new AdministrativoModel(0, $nombre, $direccion, $fecha, $correo, $telefono, $password, $cedula);
         return $this->administrativoData->insertEmpresa($empresa);
