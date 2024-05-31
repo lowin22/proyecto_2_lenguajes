@@ -1,4 +1,5 @@
 <?php 
+header("Access-Control-Allow-Origin: *");
 require_once '../controller/CuponController.php';
 $controller = new CuponController();
 if(isset($_GET['id'])){

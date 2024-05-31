@@ -7,14 +7,6 @@ import  axios  from "axios";
 
 function PageRegister() {
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
-<<<<<<< Updated upstream
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    toast.success("Registro exitoso");
-    toast.error("Error al registrar");
-
-    reset();
-=======
   const onSubmit = handleSubmit( async (data) => {
     var f = new FormData();
     f.append("name", data.name);
@@ -36,59 +28,74 @@ function PageRegister() {
       toast.error("Error al registrar la empresa");
       console.error("Error al enviar datos:", error);
     }
->>>>>>> Stashed changes
   });
 
   return (
     <div className="flex justify-center min-h-screen">
-      <form onSubmit={onSubmit} className="max-w-md w-full p-4 bg-white rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Registro</h2>
+      <form onSubmit={onSubmit} className="w-full max-w-md p-4 bg-white rounded shadow-md">
+        <h2 className="mb-4 text-2xl font-bold">Registro</h2>
         {/* espacio para recolecar el nombre*/}
         <InputRegister
           type="text"
           id="name"
-          label="Nombre"
+          label="Nombre de la empresa"
           register={register("name", {
-            required: { value: true, message: "Nombre es requerido" },
-            minLength: { value: 2, message: "Nombre debe tener al menos 2 caracteres" },
-            maxLength: { value: 15, message: "Excedió el número permitido de caracteres" },
+            required: { value: true, message: "El nombre es requerido" },
+            minLength: { value: 4, message: "El nombre debe tener al menos 4 caracteres" },
+            maxLength: { value: 50, message: "Excedió el número permitido de caracteres" },
           })}
           error={errors.name}
         />
         {/* espacio para recolecar el apellido*/}
         <InputRegister
-          type="text"
-          id="lastname"
-          label="Apellido"
-          register={register("lastname", {
-            required: { value: true, message: "El apellido es requerido" },
-            minLength: { value: 2, message: "El Apellido debe tener al menos 2 caracteres" },
-            maxLength: { value: 15, message: "Excedió el número permitido de caracteres" },
+          type="date"
+          id="fecha"
+          label="Fecha de creación"
+          register={register("fecha", {
+            required: { value: true, message: "La fecha es requerido" },
+            validate: (value) => new Date(value) <= new Date() || "La fecha no puede ser mayor a la fecha actual",
+            minLength: { value: 10, message: "La fecha debe tener al menos 10 caracteres" },
+            maxLength: { value: 10, message: "Excedió el número permitido de caracteres" },
+
           })}
-          error={errors.lastname}
+          error={errors.fecha}
         />
         {/* espacio para recolecar el cedula*/}
         <InputRegister
           type="text"
           id="card"
-          label="Cedula"
+          label="Cedula física o jurídica"
           register={register("card", {
             required: { value: true, message: "La cedula es requerido" },
-            minLength: { value: 2, message: "La cedula debe tener al menos 2 caracteres" },
-            maxLength: { value: 12, message: "Excedió el número permitido de caracteres" },
-            pattern: { value: /^\d{2}-\d{4}-\d{4}$/, message: "La cedula no es valida (formato invalido)." },
+            minLength: { value: 12, message: "La cedula debe tener al menos 12 caracteres" },
+            maxLength: { value: 14, message: "Excedió el número permitido de caracteres" },
+            validate: (value) =>
+              /^\d{2}-\d{4}-\d{4}$/.test(value) || /^\d{2}-\d{3}-\d{6}$/.test(value) || "La cedula no es valida (formato invalido).",
           })}
           error={errors.card}
+        />
+           <InputRegister
+          type="text"
+          id="telefono"
+          label="Teléfono"
+          register={register("telefono", {
+            required: { value: true, message: "El telefono es requerido" },
+            minLength: { value: 9, message: "El telefono debe tener al menos 9 caracteres" },
+            maxLength: { value: 14, message: "Excedió el número permitido de caracteres" },
+            validate: (value) =>
+              /^\d{4}-\d{4}$/.test(value) || /^\d{3}-\d{3}-\d{6}$/.test(value) || "El formato del telefono no es valida (formato invalido).",
+          })}
+          error={errors.telefono}
         />
        
         {/* espacio para recolecar la direccion*/}
         <InputRegister
           type="text"
           id="direccion"
-          label="Direccion"
+          label="Dirección física"
           register={register("direccion", {
             required: { value: true, message: "La dirreccion es requerido" },
-            minLength: { value: 20, message: "La dirreccion debe tener al menos 2 caracteres" },
+            minLength: { value: 20, message: "La dirreccion debe tener al menos 20 caracteres" },
             maxLength: { value: 100, message: "Excedió el número permitido de caracteres" },
           })}
           error={errors.direccion}
@@ -97,11 +104,11 @@ function PageRegister() {
         <InputRegister
           type="email"
           id="email"
-          label="Correo"
+          label="Correo Electrónico"
           register={register("email", {
             required: { value: true, message: "el correo es necesario" },
-            minLength: { value: 20, message: "La dirreccion debe tener al menos 2 caracteres" },
-            maxLength: { value: 100, message: "Excedió el número permitido de caracteres" },
+            minLength: { value: 10, message: "La dirreccion debe tener al menos 12 caracteres" },
+            maxLength: { value: 30, message: "Excedió el número permitido de caracteres" },
             pattern: { value: /^[a-z0-9._]+@[a-z0-9·-]+\.[a-z]{2,4}$/, message: "correo no es valido",
             },
           })}
@@ -115,9 +122,9 @@ function PageRegister() {
           label="Contrasenia"
           register={register("password", {
             required: { value: true, message: "La contrasenia es necesaria" },
-            minLength: { value: 20, message: "La contrasenia debe tener al menos 10 caracteres" },
-            maxLength: { value: 25, message: "La contresenia excedió el número permitido de caracteres" },
-            pattern: { value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*]).{8,}$/, message: "La contrasenia no es valida",
+            minLength: { value: 8, message: "La contrasenia debe tener al menos 8 caracteres" },
+            maxLength: { value: 12, message: "La contresenia excedió el número permitido de caracteres" },
+            pattern: { value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/, message: "La contrasenia no es valida",
             },
           })}
           error={errors.password}
@@ -130,50 +137,24 @@ function PageRegister() {
           label="Confirme la Contrasenia"
           register={register("confirm", {
             required: { value: true, message: "La contrasenia es necesaria" },
-            minLength: { value: 20, message: "La contrasenia debe tener al menos 10 caracteres" },
-            maxLength: { value: 25, message: "La contresenia excedió el número permitido de caracteres" },
+            minLength: { value: 8, message: "La contrasenia debe tener al menos 8 caracteres" },
+            maxLength: { value: 12, message: "La contresenia excedió el número permitido de caracteres" },
             validate: (value) =>
             value == watch("password") || "las contrasenas no coinciden",
-            pattern: { value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*]).{8,}$/, message: "La contrasenia no es valida",
+            pattern: { value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/, message: "La contrasenia no es valida",
             },
           })}
           error={errors.confirm}
         />
       
-        {/* espacio para recolecar el nombre*/}
-        <InputRegister
-          type="date"
-          id="date"
-          label="Fecha de nacimiento"
-          register={register("date", {
-            required: { value: true, message: "La contrasenia es necesaria" },
-            validate: (value) => {
-              const date = new Date(value);
-              const now = new Date();
-              const diff = now.getFullYear() - date.getFullYear();
-              return diff >= 18 || "debe ser mayor de edad";
-            },
-          })}
-          error={errors.confirm}
-        />
-      
-        {/* espacio para recolecar el los terminos y condiciones*/}
-        <InputRegister
-          type="checkbox"
-          id="term"
-          label="Terminos y condiciones"
-          {...register("term", {
-            required: { value: true, message: "Acepte los terminos y condiciones" },
-          })}
-          error={errors.term}
-        />
-       <Button text="Registrar" />
-        <pre className="mt-4">{JSON.stringify(watch(), null, 2)}</pre>
+        
+    
+       <Button text="Registrar" type={"submit"}/>
       </form>
       <Toaster 
       theme="dark"
       position="top-right"
-      duration={2000}
+      duration={4000}
       visibleToasts={2}
       />
 
