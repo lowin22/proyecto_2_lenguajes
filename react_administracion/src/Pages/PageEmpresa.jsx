@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { useRoute } from "wouter"
 import { useLocation } from "wouter"
 import { useState } from "react"
-import EmpresaView from "../Components/EmpresaView"
 import CuponView from "../Components/CuponView"
+import EmpresaGestio from "../Components/EmpresaGestio"
 
 function PageEmpresa() {
   const [cupones, setCupones] = useState([])
@@ -38,7 +38,7 @@ function PageEmpresa() {
       
 
       {empresa && (
-  <EmpresaView
+  <EmpresaGestio
     key={empresa.id_empresa}
     idEmpresa={empresa.id_empresa}
     nombre={empresa.nombre_empresa}

@@ -4,6 +4,7 @@ import PagePrincipal from "./Pages/PagePrincipal"
 import PageLogin from "./Pages/PageLogin"
 import PageRegister from "./Pages/PageRegister"
 import PageEmpresa from "./Pages/PageEmpresa"
+import PageCupon from "./Pages/PageCupon"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <Route path="/login" component={PageLogin} />
     <Route path="/register" component={PageRegister} />
     <Route path="/empresa/:id" component={PageEmpresa} />
+    <Route path="/cupon/:id" component={PageCupon} />
 
     
     </>

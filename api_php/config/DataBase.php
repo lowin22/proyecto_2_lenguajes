@@ -1,9 +1,9 @@
 <?php 
 class DataBase{
-    private $host = "sql5.freesqldatabase.com";
-    private $db_name = "sql5710117";
-    private $username = "sql5710117";
-    private $password = "69GcGQclDP";
+    private $host = "162.243.168.59";
+    private $db_name = "proyecto_2_c00490_c04408";
+    private $username = "edwin";
+    private $password = "Abcd123$";
     public $conn;
     public function dbConnection(){
         $this->conn = null;
