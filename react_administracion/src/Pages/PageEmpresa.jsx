@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { useRoute } from "wouter"
 import { useLocation } from "wouter"
 import { useState } from "react"
-import EmpresaView from "../Components/EmpresaView"
 import CuponView from "../Components/CuponView"
+import EmpresaGestio from "../Components/EmpresaGestio"
 
 function PageEmpresa() {
   const [cupones, setCupones] = useState([])
@@ -38,7 +38,7 @@ function PageEmpresa() {
       
 
       {empresa && (
-  <EmpresaView
+  <EmpresaGestio
     key={empresa.id_empresa}
     idEmpresa={empresa.id_empresa}
     nombre={empresa.nombre_empresa}
@@ -55,13 +55,13 @@ function PageEmpresa() {
     key={item.id_cupon}
     id={item.id_cupon}
     codigo={item.codigo_cupon}
-    descuento={item.descuento_cupon}
+    descuento={item.porcentaje_cupon}
     precio={item.precio_cupon}
     disponible={item.disponible_cupon}
     categoria={item.nombre_categoria}
     empresa={item.nombre_empresa}
     imagen={item.imagen_cupon}
-    vencimiento={item.fecha_vencimiento_cupon}
+    venciemiento={item.fecha_vencimiento_cupon}
   />
 ))}
 

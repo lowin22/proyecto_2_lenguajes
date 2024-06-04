@@ -21,7 +21,7 @@ class AdministrativoData{
         return $stmt->fetchAll();
     }
     public function getEmpresasActivas(){
-        $stmt = $this->conn->prepare("call sp_getEmpresas()");
+        $stmt = $this->conn->prepare("call getEmpresas()");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -35,6 +35,21 @@ class AdministrativoData{
         $stmt->bindParam(':password', $empresa->password_empresa);
         $stmt->bindParam(':cedula', $empresa->cedula_empresa);
         $stmt->execute();
+    }
+    public function insertCategoria($nombre){
+        $stmt = $this->conn->prepare("call sp_insertCategoria(:nombre)");
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->execute();
+    }
+    public function getCategorias(){
+        $stmt = $this->conn->prepare("call sp_selectCategoria()");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getEmpresaDetail(){
+        $stmt = $this->conn->prepare("call sp_getEmpresaDetail()");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }
 

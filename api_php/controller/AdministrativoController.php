@@ -17,4 +17,14 @@ class AdministrativoController{
     public function insertEmpresa($nombre, $direccion, $fecha, $correo, $telefono, $password, $cedula){
         return $this->administrativoBusiness->insertEmpresa($nombre, $direccion, $fecha, $correo, $telefono, $password, $cedula);
     }
+    public function insertCategoria($nombre){
+        return $this->administrativoBusiness->insertCategoria($nombre);
+    }
+    public function getCategorias(){
+        return $this->administrativoBusiness->getCategorias();
+    }
+    public function getEmpresasDetail(){
+        return $this->administrativoBusiness->getEmpresaDetail();
+    }
+
 }

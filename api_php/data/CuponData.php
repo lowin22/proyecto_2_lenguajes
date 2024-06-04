@@ -19,14 +19,15 @@ class CuponData{
         return $stmt->fetch();
     }
     public function insertCupon($cupon) {
-        $stmt = $this->conn->prepare("call sp_insertCupon(:codigo, :descuento, :precio, :disponible, :empresa, :categoria, :imagen)");
+        $stmt = $this->conn->prepare("call sp_insertCupon(:codigo, :porcentaje, :precio, :categoria, :empresa , :imagen, :fecha_vencimiento,:fecha_inicio)");
         $stmt->bindParam(':codigo', $cupon->codigoCupon);
-        $stmt->bindParam(':descuento', $cupon->descuentoCupon);
+        $stmt->bindParam(':porcentaje', $cupon->descuentoCupon);
         $stmt->bindParam(':precio', $cupon->precioCupon);
-        $stmt->bindParam(':disponible', $cupon->disponibleCupon);
-        $stmt->bindParam(':empresa', $cupon->empresaNombre);
         $stmt->bindParam(':categoria', $cupon->categoriaCupon);
+        $stmt->bindParam(':empresa', $cupon->empresaNombre);
         $stmt->bindParam(':imagen', $cupon->imagenCupon);
+        $stmt->bindParam(':fecha_vencimiento', $cupon->fechaVencimientoCupon);
+        $stmt->bindParam(':fecha_inicio', $cupon->fecha_inicio);
         $stmt->execute();
     }
 }
