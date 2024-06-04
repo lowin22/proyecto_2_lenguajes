@@ -55,13 +55,13 @@ function PageEmpresa() {
     key={item.id_cupon}
     id={item.id_cupon}
     codigo={item.codigo_cupon}
-    descuento={item.descuento_cupon}
+    descuento={item.porcentaje_cupon}
     precio={item.precio_cupon}
     disponible={item.disponible_cupon}
     categoria={item.nombre_categoria}
     empresa={item.nombre_empresa}
     imagen={item.imagen_cupon}
-    vencimiento={item.fecha_vencimiento_cupon}
+    venciemiento={item.fecha_vencimiento_cupon}
   />
 ))}
 

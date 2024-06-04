@@ -11,7 +11,7 @@ function InputRegister({ type, id, label, register, error }) {
       {...register}
       className="w-full p-2 pl-10 text-sm text-gray-700"
     />
-    {error && <span className="text-red-400 text-sm">{error.message}</span>}
+    {error && <span className="text-sm text-red-400">{error.message}</span>}
   </div>
   )
 }

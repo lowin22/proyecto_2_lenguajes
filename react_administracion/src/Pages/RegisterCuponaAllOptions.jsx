@@ -5,16 +5,13 @@ import Button from "../Components/Button";
 import DatalistRegister from "../Components/DatalistRegister";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRoute,useLocation } from "wouter"
 
 function PageCupon() {
   const { register: registerCategoria, handleSubmit: handleSubmitCategoria, reset: resetCategoria, formState: { errors: errorsCategoria } } = useForm();
   const { register: registerCupon, handleSubmit: handleSubmitCupon, reset: resetCupon, formState: { errors: errorsCupon }, setValue } = useForm();
   const [categorias, setCategorias] = useState([]);
-  const [match, params] = useRoute("/cupon/:id")
-  const [, setLocation] = useLocation()
-  const [categoriaActualizada, setCategoriaActualizada] = useState(false)
-
+  const [empresas, setEmpresas] = useState([]);
+  const [categoriaActualizada, setCategoriaActualizada] = useState(false);
 
   useEffect(() => {
     const obtenerCategorias = async () => {
@@ -26,7 +23,19 @@ function PageCupon() {
         console.error("Error al enviar datos:", error);
       }
     };
+
+    const obtenerEmpresas = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1/api_php/services/AdmistrativoService.php?empresas");
+        setEmpresas(response.data.map(e => ({ id: e.id_empresa, name: e.nombre_empresa })));
+      } catch (error) {
+        toast.error("Error al obtener las empresas");
+        console.error("Error al enviar datos:", error);
+      }
+    };
+
     obtenerCategorias();
+    obtenerEmpresas();
   }, [categoriaActualizada]);
 
   const registrarCategoria = handleSubmitCategoria(async (data) => {
@@ -38,7 +47,7 @@ function PageCupon() {
       const response = await axios.post("http://127.0.0.1/api_php/services/AdmistrativoService.php", f);
       toast.success(response.data);
       resetCategoria();
-      setCategoriaActualizada(prev => !prev)
+      setCategoriaActualizada(prev => !prev);
     } catch (error) {
       toast.error("Error al registrar la categoria");
       console.error("Error al enviar datos:", error);
@@ -49,7 +58,7 @@ function PageCupon() {
     try {
         var f = new FormData();
         f.append("categoria", data.categoria);
-    f.append("empresa", params.id);
+    f.append("empresa", data.empresa);
     f.append("codigo", data.codigo);
     f.append("descuento", data.descuento);
     f.append("precio", data.precio);
@@ -67,8 +76,7 @@ function PageCupon() {
       console.error("Error al enviar datos:", error);
     }
   });
-  if (!match) setLocation(`/home`);
-  
+
   return (
     <>
       <form onSubmit={registrarCategoria} className="w-full max-w-md p-4 bg-white rounded shadow-md">
@@ -176,6 +184,16 @@ function PageCupon() {
             required: { value: true, message: "La imagen es requerida" }
           })}
           error={errorsCupon.imagen}
+        />
+        <DatalistRegister
+          id="empresa"
+          label="Empresa"
+          register={registerCupon("empresa", {
+            required: { value: true, message: "La empresa es requerida" },
+          })}
+          error={errorsCupon.empresa}
+          options={empresas}
+          setValue={setValue}
         />
         <DatalistRegister
           id="categoria"
