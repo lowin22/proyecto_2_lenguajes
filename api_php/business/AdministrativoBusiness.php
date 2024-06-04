@@ -19,5 +19,15 @@ class AdministrativoBusiness{
         $empresa = new AdministrativoModel(0, $nombre, $direccion, $fecha, $correo, $telefono, $password, $cedula);
         return $this->administrativoData->insertEmpresa($empresa);
     }
+    public function insertCategoria($nombre){
+        return $this->administrativoData->insertCategoria($nombre);
+    }
+
+    public function getCategorias(){
+        return $this->administrativoData->getCategorias();
+    }
+    public function getEmpresaDetail(){
+        return $this->administrativoData->getEmpresaDetail();
+    }
 }
 
