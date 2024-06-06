@@ -15,5 +15,8 @@ class EmpresaBusiness{
         return $this->empresaData->updateEmpresa($empresa);
 
     }
-    
+    public function loginUsuario($usuario){
+        return $this->empresaData->loginUsuario($usuario);
+    }
+
 }

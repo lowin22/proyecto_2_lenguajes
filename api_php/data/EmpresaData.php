@@ -26,6 +26,12 @@ class EmpresaData{
         $result = $stmt->execute();
         return $result;
     }
-    
+    public function loginUsuario($usuario){
+        $stmt = $this->conn->prepare("call sp_validateUser(:correo, :password)");
+        $stmt->bindParam(':correo', $usuario->correo_empresa);
+        $stmt->bindParam(':password', $usuario->password_empresa);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

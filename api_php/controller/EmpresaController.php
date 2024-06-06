@@ -13,4 +13,9 @@ class EmpresaController{
         return $this->empresaBusiness->updateEmpresa($empresa);
     }
 
+    public function loginUsuario($usuario){
+
+        return $this->empresaBusiness->loginUsuario($usuario);
+    }
+
 }
