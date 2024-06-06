@@ -1,11 +1,19 @@
 import { useState } from "react"
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const [,setLocation] = useLocation();
+    
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    const cerrarSesion = () => {
+
+        sessionStorage.removeItem("usuarioLogin");
+        setLocation("/login");
+    }
+    
   return (
     <nav className="flex flex-col justify-center bg-gray-800 text-white py-4">
         <div  className="flex items-center justify-between w-full max-w-7xl px-4">
@@ -24,17 +32,15 @@ function NavBar() {
                 <Link href="/login" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Login
                 </Link>
-
-                <Link href="/register" className="block px-4 py-2 text-white hover:bg-gray-700">
-                    Register
-                </Link>
-
+                
                 <Link href="/actualizarEmpresa" className="block px-4 py-2 text-white hover:bg-gray-700">
 
                     Actualizar Empresa
                 
                 </Link>    
                 
+                <input type="button" value={"Cerrar sesión"} className="block px-4 py-2 text-white hover:bg-gray-700 cursor-pointer" onClick={() => cerrarSesion()}/>
+
                 </div>
                 <button className="block lg:hidden" onClick={toggleMenu}>
                     {menuOpen ? (
@@ -57,9 +63,11 @@ function NavBar() {
                      <Link href="/login" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Login
                      </Link>
-                     <Link href="/register" className="block px-4 py-2 text-white hover:bg-gray-700">
-                    Register
-                     </Link>
+                     <Link href="/actualizarEmpresa" className="block px-4 py-2 text-white hover:bg-gray-700">
+                        Actualizar Empresa
+                    </Link> 
+                    <input type="button" value={"Cerrar sesión"} className="block px-4 py-2 text-white hover:bg-gray-700 cursor-pointer" onClick={() => cerrarSesion()}/>
+                
                 </div>
             )}
 
