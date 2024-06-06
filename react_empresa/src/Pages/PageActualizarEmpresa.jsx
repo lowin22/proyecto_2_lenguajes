@@ -3,18 +3,33 @@ import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import InputRegister from "../Components/InputRegister";
 import Button from "../Components/Button";
+import { useLocation } from "wouter"
 import axios from 'axios';
 
 function PageActualizarEmpresa(){  
   
   const { register, handleSubmit, watch, reset, setValue, formState: { errors } } = useForm();
-
+  const [, setLocation] = useLocation();
     //cargar los datos para facilitar al usuario
     //cambiar los datos que necesite
     useEffect(() => {
+
+      const validarSesion = () => {
+
+        if(sessionStorage.getItem("usuarioLogin") === null){
+          
+          setLocation("/login");
+
+          return false;
+        }
+        
+        return true;
+
+      };
+
       const fetchData = async () => {
         try {
-          const response = await fetch('http://127.0.0.1/proyecto_2_lenguajes/api_php/services/EmpresaService.php?id=3&route=getEmpresaById'); // URL de la API
+          const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/EmpresaService.php?id=${sessionStorage.getItem("usuarioLogin")}&route=getEmpresaById`); // URL de la API
           const data = await response.json();
           const empresa = data[0];
           
@@ -34,14 +49,19 @@ function PageActualizarEmpresa(){
           toast.error('Error al obtener datos de la API');
         }
       };
-  
+
+      //verificar la sesion primero
+      if(!validarSesion()) return;
+
       fetchData();
-    }, [setValue]);
+      
+
+    }, [setValue, setLocation]);
 
   const handleUpdate = async (data) => {
     
     try {
-      const response = await fetch('http://127.0.0.1/proyecto_2_lenguajes/api_php/services/EmpresaService.php?id=3&route=updateEmpresa', {
+      const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/EmpresaService.php?id=${sessionStorage.getItem("usuarioLogin")}&route=updateEmpresa`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -200,7 +220,7 @@ function PageActualizarEmpresa(){
         />
 
         <Button text="Actualizar" />
-        <pre className="mt-4">{JSON.stringify(watch(), null, 2)}</pre>
+        
       </form>
       <Toaster 
       theme="dark"
