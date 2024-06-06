@@ -6,6 +6,8 @@ import PageRegister from "./Pages/PageRegister"
 import PageEmpresa from "./Pages/PageEmpresa"
 import PageCupon from "./Pages/PageCupon"
 import RegisterCuponaAllOptions from "./Pages/RegisterCuponaAllOptions"
+import PageRegisterPromotion from "./Pages/PageRegisterPromotion"
+import PageCuponDetail from "./Pages/PageCuponDetail"
 function App() {
 
 
@@ -20,6 +22,9 @@ function App() {
     <Route path="/empresa/:id" component={PageEmpresa} />
     <Route path="/cupon/:id" component={PageCupon} />
     <Route path="/registrarcupon" component={RegisterCuponaAllOptions} />
+    <Route path="/registerpromotion/:id" component={PageRegisterPromotion} />
+    <Route path="/viewpromotion/:id" component={PageCuponDetail} />
+
 
     
     </>

@@ -51,6 +51,11 @@ class AdministrativoData{
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function changeStateEmpresa($id){
+        $stmt = $this->conn->prepare("call sp_update_change_empresa(:id)");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
 }
 
 

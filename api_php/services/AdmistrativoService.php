@@ -20,7 +20,13 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         }else if(isset($_GET['empresas'])){
             $empresas = $controller->getEmpresasDetail();
             echo json_encode($empresas);
+        }else if(isset($_GET['stateEmpresa'])){
+            $controller->changeStateEmpresa($_GET['stateEmpresa']);
+            header("HTTP/1.1 200 OK");
+            echo json_encode("Cambio de estado exitoso");
+            exit();
         }
+            
             else{
             $empresas = $controller->getEmpresasActivas();
             echo json_encode($empresas);

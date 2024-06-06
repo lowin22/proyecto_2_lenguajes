@@ -29,5 +29,8 @@ class AdministrativoBusiness{
     public function getEmpresaDetail(){
         return $this->administrativoData->getEmpresaDetail();
     }
+    public function changeStateEmpresa($id){
+        return $this->administrativoData->changeStateEmpresa($id);
+    }
 }
 
