@@ -15,6 +15,17 @@ function PageCupon() {
   const [, setLocation] = useLocation()
 
   useEffect(() => {
+
+    const validarSesion = () => {
+
+      if(sessionStorage.getItem("usuarioLogin") === null){
+        setLocation("/login");
+        return false;
+      }
+
+      return true;
+    }
+    
     const obtenerCategorias = async () => {
       try {
         const response = await axios.get("http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?categorias");
@@ -24,8 +35,12 @@ function PageCupon() {
         console.error("Error al enviar datos:", error);
       }
     };
+
+    if(!validarSesion()) return;
+
     obtenerCategorias();
-  }, [setCategorias]);
+
+  }, [setCategorias, setLocation]);
 
   const registrarCupon = handleSubmitCupon(async (data) => {
     try {
