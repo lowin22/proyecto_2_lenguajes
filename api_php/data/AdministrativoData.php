@@ -56,6 +56,17 @@ class AdministrativoData{
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+    public function updateEmpresa($empresa){
+        $stmt = $this->conn->prepare("call sp_updateEmpresaAdmin(:id, :nombre, :dirreccion, :fecha, :correo, :telefono, :cedula)");
+        $stmt->bindParam(':id', $empresa->id_empresa);
+        $stmt->bindParam(':nombre', $empresa->nombre_empresa);
+        $stmt->bindParam(':dirreccion', $empresa->direccion_empresa);
+        $stmt->bindParam(':fecha', $empresa->fecha_creacion_empresa);
+        $stmt->bindParam(':correo', $empresa->correo_empresa);
+        $stmt->bindParam(':telefono', $empresa->telefono_empresa);
+        $stmt->bindParam(':cedula', $empresa->cedula_empresa);
+        $stmt->execute();
+    }
 }
 
 

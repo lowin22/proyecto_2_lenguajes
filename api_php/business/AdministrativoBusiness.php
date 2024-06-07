@@ -32,5 +32,10 @@ class AdministrativoBusiness{
     public function changeStateEmpresa($id){
         return $this->administrativoData->changeStateEmpresa($id);
     }
+
+    public function updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula){
+        $empresa = new AdministrativoModel($id, $nombre, $direccion, $fecha, $correo, $telefono, "", $cedula);
+        return $this->administrativoData->updateEmpresa($empresa);
+    }
 }
 

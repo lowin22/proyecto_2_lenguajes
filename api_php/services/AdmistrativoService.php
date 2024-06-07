@@ -47,9 +47,13 @@ if($_POST['METHOD']=='POST'){
         header("HTTP/1.1 200 OK");
         echo json_encode("Registro Exitoso");
         exit();
+    }else if(isset($_POST['idActualizarEmpresa'])){
+        $controller->updateEmpresa($_POST['idActualizarEmpresa'], $_POST['nombre'], $_POST['direccion'], $_POST['fecha'], $_POST['correo'], $_POST['telefono'], $_POST['cedula']);
+        echo json_encode("Actualizacion Exitosa");
+        exit();
     }
-
 }
-header('HTTP/1.1 400 Bad Request');
+
 ?>
+
 
