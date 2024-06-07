@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from 'react';
 import { Toaster, toast } from "sonner";
 import Button from "../Components/Button";
 import axios from "axios";
@@ -10,6 +11,22 @@ function PageRegisterPromotion() {
     const [match, params] = useRoute("/registerpromotion/:id");
     const [, setLocation] = useLocation();
 
+    useEffect(() => {
+
+        const validarSesion = () => {
+
+            if(sessionStorage.getItem("usuarioLogin") === null){
+              setLocation("/login");
+              return false;
+            }
+      
+            return true;
+          }
+    
+        validarSesion();
+    
+      }, [setLocation]);
+      
     const onSubmit = handleSubmit(async (data) => {
         var f = new FormData();
         f.append("idCuponDescuento", params.id);

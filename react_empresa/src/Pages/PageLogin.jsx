@@ -10,6 +10,12 @@ function PageLogin() {
   const { register, handleSubmit, watch, reset, setValue, formState: { errors } } = useForm();
   const [, setLocation] = useLocation();
 
+  useEffect(() => {
+
+    sessionStorage.removeItem("usuarioLogin");
+
+  }, []);
+
   const handleLogin = async (data) => {
     
     try {

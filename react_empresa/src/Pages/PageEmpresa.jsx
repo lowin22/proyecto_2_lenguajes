@@ -11,7 +11,21 @@ function PageEmpresa() {
   const [cupones, setCupones] = useState([])
   const[empresa, setEmpresa] = useState()
   const [change, setChange] = useState(false)
+  const [,setLocation] = useLocation()
   useEffect(() => {
+
+    const validarSesion = () => {
+
+      if(sessionStorage.getItem("usuarioLogin") === null){
+        setLocation("/login");
+        return false;
+      }
+
+      return true;
+    }
+
+        if(!validarSesion()) return;
+
         async function getDataEmpresa() {
           const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?idEmpresa=${sessionStorage.getItem("usuarioLogin")}`)
           const data = await response.json()
@@ -29,7 +43,7 @@ function PageEmpresa() {
         getDataEmpresa()
          getCuponesEmpresa()
       }
-      , [change])
+      , [change, setLocation])
       const handleButtonClick = async (id) => {
         try {
           const response = await axios.get(

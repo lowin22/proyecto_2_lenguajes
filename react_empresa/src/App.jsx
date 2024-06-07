@@ -19,7 +19,6 @@ function App() {
     <Route path="/" component={PageEmpresa} />
     <Route path="/home" component={PageEmpresa} />
     <Route path="/login" component={PageLogin} />
-    <Route path="/register" component={PageRegister} />
     <Route path="/actualizarEmpresa" component={PageActualizarEmpresa} />
     <Route path="/cuponEmpresa" component={PageCupon} />
     <Route path="/viewpromotion/:id" component={PageCuponDetail} />

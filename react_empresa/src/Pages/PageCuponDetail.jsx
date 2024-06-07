@@ -13,6 +13,19 @@ function PageCuponDetail() {
   const [change, setChange] = useState(false);
 
   useEffect(() => {
+
+    const validarSesion = () => {
+
+      if(sessionStorage.getItem("usuarioLogin") === null){
+        setLocation("/login");
+        return false;
+      }
+
+      return true;
+    }
+
+    if(!validarSesion()) return;
+
     const obtenerCupon = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/cuponservice.php?idCuponDescuento=${params.id}`);
@@ -37,7 +50,7 @@ function PageCuponDetail() {
 
     obtenerCupon();
     obtenerPromociones();
-  }, [params.id, change]);  // Ensure the effect runs when `params.id` or `change` changes
+  }, [params.id, change, setLocation]);  // Ensure the effect runs when `params.id` or `change` changes
 
   const handleButtonClick = async (id) => {
     try {
