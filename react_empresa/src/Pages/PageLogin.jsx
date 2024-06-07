@@ -18,10 +18,18 @@ function PageLogin() {
       const result = await response.json();
       const usuario = result[0];
       console.log('result',result);
+      // console.log('usuario_empresa', usuario.empresa_nueva);
 
       if(result.length === 0 || usuario.valido === 0){
         toast.error("Error al realizar el login");
         return;
+      }
+
+      if(usuario.activa_empresa === 0){
+
+        toast.error("La empresa no esta activa");
+        return;
+
       }
 
       if(usuario.valido){
@@ -93,7 +101,7 @@ function PageLogin() {
           error={errors.password}
         />
 
-        <Button text="Validar" />
+        <Button text="Iniciar sesión" />
         
       </form>
       <Toaster 

@@ -4,54 +4,61 @@ import { useLocation } from "wouter"
 import { useState } from "react"
 import CuponView from "../Components/CuponView"
 import EmpresaGestio from "../Components/EmpresaGestio"
+import { Toaster, toast } from "sonner";
+import axios from "axios";
 
 function PageEmpresa() {
   const [cupones, setCupones] = useState([])
   const[empresa, setEmpresa] = useState()
+  const [change, setChange] = useState(false)
   useEffect(() => {
-
-    const validarSesion = () => {
-
-      if(sessionStorage.getItem("usuarioLogin") === null){
-        setLocation("/login");
-        return false;
+        async function getDataEmpresa() {
+          const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?idEmpresa=${sessionStorage.getItem("usuarioLogin")}`)
+          const data = await response.json()
+          setEmpresa(data)
+          console.log(data)
+        }
+    
+        async function getCuponesEmpresa(){
+          const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?idEmpresaCupon=${sessionStorage.getItem("usuarioLogin")}`
+          )
+          const data = await response.json()
+          setCupones(data)   
+          console.log(data)
+        }
+        getDataEmpresa()
+         getCuponesEmpresa()
       }
-
-      return true;
-    }
-
-      async function getDataEmpresa() {
-        const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?idEmpresa=${sessionStorage.getItem("usuarioLogin")}`)
-        const data = await response.json()
-        setEmpresa(data)
-        console.log(data)
+      , [change])
+      const handleButtonClick = async (id) => {
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1/proyecto_2_lenguajes/api_php/services/cuponservice.php?stateCupon=${id}` );
+            
+        
+          toast.success(response.data);
+          setChange(!change);
+        } catch (error) {
+          toast.error("Error al actualizar el cupón");
+          console.error("Error al enviar datos:", error);
+        }
+      };
+      const handleStateEmpresa = async (id) => {
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?stateEmpresa=${id}`);
+          toast.success(response.data);
+          setChange(!change);
+        } catch (error) {
+          toast.error("Error al actualizar la empresa");
+          console.error("Error al enviar datos:", error);
+        }
       }
-  
-      async function getCuponesEmpresa(){
-        const response = await fetch(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?idEmpresaCupon=${sessionStorage.getItem("usuarioLogin")}`
-        )
-        const data = await response.json()
-        setCupones(data)   
-        console.log(data)
-      }
-      
-      //verificar la sesion primero
-      if(!validarSesion()) return;
-
-      getDataEmpresa()
-      getCuponesEmpresa()
-
-    }
-    , [])
-
-    // const [match, params] = useRoute("/empresa/:id")
-    const [, setLocation] = useLocation()
-    // if (!match) return  setLocation(`/home`)
  
     return (
       <>
-      {/* <h3 className="mb-6 text-3xl font-bold mx-auto max-w-md">Empresa</h3>
-       */}
+      <h1 className="mb-6 text-3xl font-bold">Empresa</h1>
+      
 
       {empresa && (
   <EmpresaGestio
@@ -63,6 +70,8 @@ function PageEmpresa() {
     fecha={empresa.fecha_creacion_empresa}
     correo={empresa.correo_empresa}
     telefono={empresa.telefono_empresa}
+    stateEmpresa={handleStateEmpresa}
+    disponible={empresa.activa_empresa}
   />
 )}
      
@@ -78,9 +87,15 @@ function PageEmpresa() {
     empresa={item.nombre_empresa}
     imagen={item.imagen_cupon}
     venciemiento={item.fecha_vencimiento_cupon}
+    update={handleButtonClick}
   />
 ))}
-
+   <Toaster 
+      theme="dark"
+      position="top-right"
+      duration={4000}
+      visibleToasts={2}
+      />
       
       </>
       

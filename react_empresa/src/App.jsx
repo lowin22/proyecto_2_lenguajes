@@ -1,6 +1,8 @@
 import NavBar from "./Components/NavBar"
 import { Route } from "wouter"
 import PagePrincipal from "./Pages/PagePrincipal"
+import PageRegisterPromotion from "./Pages/PageRegisterPromotion"
+import PageCuponDetail from "./Pages/PageCuponDetail"
 import PageLogin from "./Pages/PageLogin"
 import PageRegister from "./Pages/PageRegister"
 import PageActualizarEmpresa from "./Pages/PageActualizarEmpresa"
@@ -20,6 +22,9 @@ function App() {
     <Route path="/register" component={PageRegister} />
     <Route path="/actualizarEmpresa" component={PageActualizarEmpresa} />
     <Route path="/cuponEmpresa" component={PageCupon} />
+    <Route path="/viewpromotion/:id" component={PageCuponDetail} />
+    <Route path="/registerpromotion/:id" component={PageRegisterPromotion} />
+
     </>
   )
 }
