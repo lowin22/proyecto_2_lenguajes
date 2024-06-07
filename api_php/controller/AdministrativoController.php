@@ -29,5 +29,8 @@ class AdministrativoController{
     public function changeStateEmpresa($id){
         return $this->administrativoBusiness->changeStateEmpresa($id);
     }
+    public function updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula){
+        return $this->administrativoBusiness->updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula);
+    }
 
 }
