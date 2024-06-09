@@ -29,5 +29,11 @@ class CuponController{
     public function insertCuponDescuento($idCupon, $porcentaje, $fecha_inicio, $fecha_fin){
         return $this->cuponBusiness->insertCuponDescuento($idCupon, $porcentaje, $fecha_inicio, $fecha_fin);
     }
+    public function getCuponActivos(){
+        return $this->cuponBusiness->getCuponActivos();
+    }
+    public function getCuponActivosByCategoria($categoria){
+        return $this->cuponBusiness->getCuponActivosByCategoria($categoria);
+    }
 }
 ?>
