@@ -9,6 +9,9 @@ import RegisterCuponaAllOptions from "./Pages/RegisterCuponaAllOptions"
 import PageRegisterPromotion from "./Pages/PageRegisterPromotion"
 import PageCuponDetail from "./Pages/PageCuponDetail"
 import PageEditarEmpresa from "./Pages/PageEditarEmpresa"
+import PageUpdateCupon from "./Pages/PageUpdateCupon"
+import PageUpdatePromocion from "./Pages/PageUpdatePromocion"
+import PageEditCategoria from "./Pages/PageEditCategoria"
 function App() {
 
 
@@ -26,6 +29,11 @@ function App() {
     <Route path="/registerpromotion/:id" component={PageRegisterPromotion} />
     <Route path="/viewpromotion/:id" component={PageCuponDetail} />
     <Route path="/editarempresa/:id" component={PageEditarEmpresa} />
+    <Route path="/editarcupon/:id" component={PageUpdateCupon} />
+    <Route path="/editardescuento/:id" component={PageUpdatePromocion} />
+    <Route path="/editarcategoria" component={PageEditCategoria} />
+
+
 
 
     

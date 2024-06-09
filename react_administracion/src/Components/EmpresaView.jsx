@@ -13,7 +13,7 @@ function EmpresaView({idEmpresa, nombre, direccion, cedula, fecha, correo, telef
 
   
   return (
-    <div className="p-4 mb-4 border rounded-lg shadow-md">
+    <div className="p-4 mb-4 border rounded-lg shadow-md ">
       <h2 className="mb-2 text-xl font-bold">{nombre}</h2>
       <p className="mb-1"><span className="font-semibold">Dirección:</span> {direccion}</p>
       <p className="mb-1"><span className="font-semibold">Cédula:</span> {cedula}</p>
