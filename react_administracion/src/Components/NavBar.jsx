@@ -29,6 +29,9 @@ function NavBar() {
                      <Link href="/registrarcupon" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Register Cupon
                      </Link>
+                     <Link href="/editarcategoria" className="block px-4 py-2 text-white hover:bg-gray-700">
+                    Registrar categoria
+                     </Link>
                 </div>
                 <button className="block lg:hidden" onClick={toggleMenu}>
                     {menuOpen ? (
@@ -56,6 +59,9 @@ function NavBar() {
                      </Link>
                      <Link href="/registrarcupon" className="block px-4 py-2 text-white hover:bg-gray-700">
                     Register Cupon
+                     </Link>
+                     <Link href="/editarcategoria" className="block px-4 py-2 text-white hover:bg-gray-700">
+                    Registrar categoria
                      </Link>
                 </div>
             )}

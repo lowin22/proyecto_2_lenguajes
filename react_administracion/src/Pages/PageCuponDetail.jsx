@@ -8,7 +8,7 @@ import Promocion from "../Components/Promocion";
 function PageCuponDetail() {
   const [match, params] = useRoute("/viewpromotion/:id");
   const [, setLocation] = useLocation();
-  const [cupon, setCupon] = useState(null);  // Default to null to handle loading state
+  const [cupon, setCupon] = useState(null);  
   const [promociones, setPromociones] = useState([]);
   const [change, setChange] = useState(false);
 
