@@ -60,4 +60,15 @@ class CuponData{
         $stmt->bindParam(':fecha_fin_cupon_oferta', $cuponDescuento->fechaFinDescuento);
         $stmt->execute();
     }
+    public function getCuponActivos(){
+        $stmt = $this->conn->prepare("call sp_getCuponActivos()");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getCuponActivosByCategoria($categoria){
+        $stmt = $this->conn->prepare("call sp_getCuponActivosByCategoria(:categoria_)");
+        $stmt->bindParam(':categoria_', $categoria);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
