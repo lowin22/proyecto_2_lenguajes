@@ -1,6 +1,8 @@
 <?php 
 require_once '../data/AdministrativoData.php';
 require_once '../models/AdministrativoModel.php';
+require_once '../models/CuponModel.php';
+require_once '../models/CuponDescuentoModel.php';
 class AdministrativoBusiness{
     private $administrativoData;
     public function __construct(){
@@ -36,6 +38,26 @@ class AdministrativoBusiness{
     public function updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula){
         $empresa = new AdministrativoModel($id, $nombre, $direccion, $fecha, $correo, $telefono, "", $cedula);
         return $this->administrativoData->updateEmpresa($empresa);
+    }
+    public function updateCupon($id, $codigo, $descuento, $precio, $empresa, $categoria, $imagen, $fechaVencimiento, $fecha_inicio){
+        $cupon = new CuponModel($id, $codigo, $descuento, $precio, $empresa, $categoria, $imagen, $fechaVencimiento, $fecha_inicio);
+        return $this->administrativoData->updateCupon($cupon);
+    }
+    public function updatePromocion($id, $descuento, $fecha_inicio, $fecha_vencimiento){
+        $descuento = new CuponDescuentoModel($id, $descuento, $fecha_inicio, $fecha_vencimiento);
+        return $this->administrativoData->updatePromocion($descuento);
+    }
+    public function descuentoById($id){
+        return $this->administrativoData->getDescuentoById($id);
+    }
+    public function getAllCategorias(){
+        return $this->administrativoData->getAllCategorias();
+    }
+    public function updateCategoria($id, $nombre){
+        return $this->administrativoData->updateCategoria($id, $nombre);
+    }
+    public function changeDisponibilidadCategoria($id){
+        return $this->administrativoData->changeDisponibilidadCategoria($id);
     }
 }
 

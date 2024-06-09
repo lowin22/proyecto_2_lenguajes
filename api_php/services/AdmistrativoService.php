@@ -25,8 +25,17 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
             header("HTTP/1.1 200 OK");
             echo json_encode("Cambio de estado exitoso");
             exit();
+        }else if(isset($_GET['descuentoID'])){
+            $descuento = $controller->descuentoById($_GET['descuentoID']);
+            echo json_encode($descuento);
+        }else if(isset($_GET['allCategorias'])){
+            $categorias = $controller->getAllCategorias();
+            echo json_encode($categorias);
+        }else if(isset($_GET['idCategoriaChangeDisponibilidad'])){
+            $controller->changeDisponibilidadCategoria($_GET['idCategoriaChangeDisponibilidad']);
+            echo json_encode("Cambio de disponibilidad exitoso");
+            exit();
         }
-            
             else{
             $empresas = $controller->getEmpresasActivas();
             echo json_encode($empresas);
@@ -49,6 +58,35 @@ if($_POST['METHOD']=='POST'){
         exit();
     }else if(isset($_POST['idActualizarEmpresa'])){
         $controller->updateEmpresa($_POST['idActualizarEmpresa'], $_POST['nombre'], $_POST['direccion'], $_POST['fecha'], $_POST['correo'], $_POST['telefono'], $_POST['cedula']);
+        echo json_encode("Actualizacion Exitosa");
+        exit();
+    }else if(isset($_POST['idActualizarCupon'])){
+        $uploadDir = 'uploads/';
+        $nombreCupon = $_POST['codigo'];
+        $nombreEmpresa = $_POST['empresa'];
+        $idCupon = $_POST['categoria'];
+        $nombreCupon = preg_replace('/[^A-Za-z0-9_\-]/', '_', $nombreCupon);
+        $nombreEmpresa = preg_replace('/[^A-Za-z0-9_\-]/', '_', $nombreEmpresa);
+        $fileExtension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+        $uniqueName = $nombreCupon . '_' . $nombreEmpresa . '_' . $idCupon . '.' . $fileExtension;
+        $uploadFile = $uploadDir . $uniqueName;
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $uploadFile)) {
+            $imagen = $uniqueName;
+            $controller->updateCupon($_POST['idActualizarCupon'], $_POST['codigo'], $_POST['descuento'], $_POST['precio'], $_POST['empresa'], $_POST['categoria'], $imagen, $_POST['fecha_vencimiento'], $_POST['fecha_inicio']);
+            echo json_encode(["status" => "success", "message" => "File successfully uploaded", "filePath" => $uploadFile]);
+        exit();
+        } else {
+            echo json_encode(["status" => "error", "message" => "File upload failed"]);
+        }
+    } else if(isset($_POST['idActualizarPromocion'])){
+        $controller->updatePromocion($_POST['idActualizarPromocion'], $_POST['descuento'], $_POST['fecha_inicio'], $_POST['fecha_vencimiento']);
+        echo json_encode("Actualizacion Exitosa");
+        exit(); 
+    } else if(isset($_POST['idActualizarCategoria'])){
+        $controller->updateCategoria($_POST['idActualizarCategoria'], $_POST['nombre']);
         echo json_encode("Actualizacion Exitosa");
         exit();
     }

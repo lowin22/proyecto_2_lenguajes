@@ -32,5 +32,24 @@ class AdministrativoController{
     public function updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula){
         return $this->administrativoBusiness->updateEmpresa($id, $nombre, $direccion, $fecha, $correo, $telefono, $cedula);
     }
+    public function updateCupon($id, $codigo, $descuento, $precio, $empresa, $categoria, $imagen, $fechaVencimiento, $fecha_inicio){
+        return $this->administrativoBusiness->updateCupon($id, $codigo, $descuento, $precio, $empresa, $categoria, $imagen, $fechaVencimiento, $fecha_inicio);
+
+    }
+    public function updatePromocion($id, $descuento, $fecha_inicio, $fecha_vencimiento){
+        return $this->administrativoBusiness->updatePromocion($id, $descuento, $fecha_inicio, $fecha_vencimiento);
+    }
+    public function descuentoById($id){
+        return $this->administrativoBusiness->descuentoById($id);
+    }
+    public function getAllCategorias(){
+        return $this->administrativoBusiness->getAllCategorias();
+    }
+    public function updateCategoria($id, $nombre){
+        return $this->administrativoBusiness->updateCategoria($id, $nombre);
+    }
+    public function changeDisponibilidadCategoria($id){
+        return $this->administrativoBusiness->changeDisponibilidadCategoria($id);
+    }
 
 }
