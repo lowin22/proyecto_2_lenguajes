@@ -6,6 +6,7 @@ import PageCuponDetail from "./Pages/PageCuponDetail"
 import PageLogin from "./Pages/PageLogin"
 import PageRegister from "./Pages/PageRegister"
 import PageUpdateCupon from "./Pages/PageUpdateCupon"
+import PageUpdatePromocion from "./Pages/PageUpdatePromocion"
 import PageActualizarEmpresa from "./Pages/PageActualizarEmpresa"
 import PageEmpresa from "./Pages/PageEmpresa"
 import PageCupon from "./Pages/PageCupon"
@@ -25,6 +26,7 @@ function App() {
     <Route path="/viewpromotion/:id" component={PageCuponDetail} />
     <Route path="/registerpromotion/:id" component={PageRegisterPromotion} />
     <Route path="/editarcupon/:id" component={PageUpdateCupon} />
+    <Route path="/editardescuento/:id" component={PageUpdatePromocion} />
     </>
   )
 }
