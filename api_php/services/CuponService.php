@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='GET' ){
         $controller->changeStateDescuento($_GET['stateDescuento']);
         header("HTTP/1.1 200 ok");
         echo json_encode("Descuento actualizado");
-    }else if(isset($_GET['cuponesActivos'])){
+    }else if(isset($_GET['activos'])){
         $cupones = $controller->getCuponActivos();
         echo json_encode($cupones);
     }else if(isset($_GET['categoria'])){
