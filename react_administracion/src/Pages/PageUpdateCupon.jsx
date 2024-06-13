@@ -115,7 +115,7 @@ function PageUpdateCupon() {
                     label="Nombre de la categoria"
                     register={registerCategoria("nombre_categoria", {
                         required: { value: true, message: "La categoria es requerida" },
-                        minLength: { value: 6, message: "La categoria debe tener al menos 6 caracteres" },
+                        minLength: { value: 5, message: "La categoria debe tener al menos 6 caracteres" },
                         maxLength: { value: 15, message: "Excedió el número permitido de caracteres" },
                     })}
                     error={errorsCategoria.nombre_categoria}
