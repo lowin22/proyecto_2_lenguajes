@@ -94,12 +94,12 @@ function PageUpdateCupon() {
             f.append("fecha_inicio", data.fechainicio);
             f.append("idActualizarCupon", params.id);
             f.append("METHOD", "POST");
-            const response = await axios.post("http://127.0.0.1/api_php/services/AdmistrativoService.php", f);
+            const response = await axios.post("https://proyectodoslenguajes.000webhostapp.com/services/AdmistrativoService.php", f);
             toast.success(response.data);
             console.log(response.data);
             resetCupon();
         } catch (error) {
-            toast.error("Error al registrar la empresa");
+            toast.error("Error al actualizar el cupon");
             console.error("Error al enviar datos:", error);
         }
     });

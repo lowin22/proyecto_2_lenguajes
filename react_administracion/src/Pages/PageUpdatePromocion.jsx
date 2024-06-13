@@ -58,7 +58,7 @@ function PageUpdatePromocion() {
                 <InputRegister
                     type="text"
                     id="descuento"
-                    label="Precio"
+                    label="Descuento"
                     register={register("descuento", {
                         required: { value: true, message: "El descuento es requerido" },
                         minLength: { value: 1, message: "El descuento debe tener al menos 1 digito" },

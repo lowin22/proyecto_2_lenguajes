@@ -20,8 +20,8 @@ function EmpresaView({idEmpresa, nombre, direccion, cedula, fecha, correo, telef
       <p className="mb-1"><span className="font-semibold">Fecha de Creación:</span> {fecha}</p>
       <p className="mb-1"><span className="font-semibold">Correo:</span> {correo}</p>
       <p className="mb-1"><span className="font-semibold">Teléfono:</span> {telefono}</p>
-      <button  onClick={()=>handleOnClick(idEmpresa)} className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ver Detalles {idEmpresa} </button>
-      <button  onClick={()=>handleOnClickEdit(idEmpresa)} className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-600">Editar Informacion {idEmpresa} </button>
+      <button  onClick={()=>handleOnClick(idEmpresa)} className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ver Detalles  </button>
+      <button  onClick={()=>handleOnClickEdit(idEmpresa)} className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-600">Editar Informacion  </button>
     </div>
   )
 }
