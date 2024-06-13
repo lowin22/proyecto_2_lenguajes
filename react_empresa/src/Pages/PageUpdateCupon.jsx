@@ -8,14 +8,12 @@ import { useEffect, useState } from "react";
 import { useRoute, useLocation } from "wouter";
 
 function PageUpdateCupon() {
-    const { register: registerCategoria, handleSubmit: handleSubmitCategoria, reset: resetCategoria, formState: { errors: errorsCategoria } } = useForm();
     const { register: registerCupon, handleSubmit: handleSubmitCupon, reset: resetCupon, formState: { errors: errorsCupon }, setValue } = useForm();
     const [categorias, setCategorias] = useState([]);
     const [empresas, setEmpresas] = useState([]);
     const [match, params] = useRoute("/editarcupon/:id");
     const [, setLocation] = useLocation();
     const [cupon, setCupon] = useState(null);
-    const [categoriaActualizada, setCategoriaActualizada] = useState(false);
 
     useEffect(() => {
         const obtenerCategorias = async () => {
@@ -27,6 +25,16 @@ function PageUpdateCupon() {
                 console.error("Error al enviar datos:", error);
             }
         };
+
+        const validarSesion = () => {
+
+            if(sessionStorage.getItem("usuarioLogin") === null){
+              setLocation("/login");
+              return false;
+            }
+      
+            return true;
+          }
 
         const obtenerEmpresas = async () => {
             try {
@@ -48,10 +56,12 @@ function PageUpdateCupon() {
             }
         };
 
+        if(!validarSesion()) return;
+
         obtenerCategorias();
         obtenerEmpresas();
         obtenerCupon();
-    }, [params.id, categoriaActualizada]);
+    }, [params.id, setLocation]);
 
     useEffect(() => {
         if (cupon) {
@@ -64,22 +74,6 @@ function PageUpdateCupon() {
             setValue("categoria", cupon.id_categoria_cupon);
         }
     }, [cupon, setValue]);
-
-    const registrarCategoria = handleSubmitCategoria(async (data) => {
-        toast.success("Registro exitoso");
-        try {
-            var f = new FormData();
-            f.append("nombre_categoria", data.nombre_categoria);
-            f.append("METHOD", "POST");
-            const response = await axios.post("http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php", f);
-            toast.success(response.data);
-            resetCategoria();
-            setCategoriaActualizada(prev => !prev);
-        } catch (error) {
-            toast.error("Error al registrar la categoria");
-            console.error("Error al enviar datos:", error);
-        }
-    });
 
     const registrarCupon = handleSubmitCupon(async (data) => {
         try {
@@ -94,7 +88,7 @@ function PageUpdateCupon() {
             f.append("fecha_inicio", data.fechainicio);
             f.append("idActualizarCupon", params.id);
             f.append("METHOD", "POST");
-            const response = await axios.post("http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php", f);
+            const response = await axios.post("https://proyectodoslenguajes.000webhostapp.com/services/AdmistrativoService.php", f);
             toast.success(response.data);
             console.log(response.data);
             resetCupon();
@@ -108,21 +102,6 @@ function PageUpdateCupon() {
 
     return (
         <>
-            <form onSubmit={registrarCategoria} className="w-full max-w-md p-4 bg-white rounded shadow-md">
-                <InputRegister
-                    type="text"
-                    id="nombre_categoria"
-                    label="Nombre de la categoria"
-                    register={registerCategoria("nombre_categoria", {
-                        required: { value: true, message: "La categoria es requerida" },
-                        minLength: { value: 6, message: "La categoria debe tener al menos 6 caracteres" },
-                        maxLength: { value: 15, message: "Excedió el número permitido de caracteres" },
-                    })}
-                    error={errorsCategoria.nombre_categoria}
-                />
-                <Button text="Registrar Categoria" type="submit" />
-            </form>
-
             <form onSubmit={registrarCupon} className="w-full max-w-md p-4 bg-white rounded shadow-md">
                 <InputRegister
                     type="text"

@@ -11,8 +11,21 @@ function PageUpdatePromocion() {
     const [match, params] = useRoute("/editardescuento/:id");
     const [descuento, setDescuento] = useState(null);
     const [, setLocation] = useLocation();
-
+    
     useEffect(() => {
+
+        const validarSesion = () => {
+
+            if(sessionStorage.getItem("usuarioLogin") === null){
+              setLocation("/login");
+              return false;
+            }
+      
+            return true;
+          }
+    
+        if(!validarSesion()) return;
+
         axios.get(`http://127.0.0.1/proyecto_2_lenguajes/api_php/services/AdmistrativoService.php?descuentoID=${params.id}`)
             .then((response) => {
                 setDescuento(response.data);
@@ -20,15 +33,28 @@ function PageUpdatePromocion() {
             .catch((error) => {
                 console.error("Error al obtener los datos:", error);
             });
-    }, [params.id]);
+    }, [params.id, setLocation]);
 
     useEffect(() => {
+
+        const validarSesion = () => {
+
+            if(sessionStorage.getItem("usuarioLogin") === null){
+              setLocation("/login");
+              return false;
+            }
+      
+            return true;
+          }
+    
+        if(!validarSesion()) return;
+
         if (descuento) {
             setValue('descuento', descuento.porcentaje_reabaja);
             setValue('fechainicio', descuento.fecha_inicio_cupon_oferta);
             setValue('vencimiento', descuento.fecha_fin_cupon_oferta);
         }
-    }, [descuento, setValue]);
+    }, [descuento, setValue, setLocation]);
 
     const onSubmit = handleSubmit(async (data) => {
         var f = new FormData();
@@ -58,7 +84,7 @@ function PageUpdatePromocion() {
                 <InputRegister
                     type="text"
                     id="descuento"
-                    label="Precio"
+                    label="Descuento"
                     register={register("descuento", {
                         required: { value: true, message: "El descuento es requerido" },
                         minLength: { value: 1, message: "El descuento debe tener al menos 1 digito" },

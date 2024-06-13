@@ -55,7 +55,7 @@ function PageCupon() {
     f.append("fecha_inicio", data.fechainicio);
       
         f.append("METHOD", "POST")
-      const response = await axios.post("http://127.0.0.1/proyecto_2_lenguajes/api_php/services/CuponService.php",f);
+      const response = await axios.post("https://proyectodoslenguajes.000webhostapp.com/services/CuponService.php",f);
       toast.success(response.data);
       console.log(response.data);
       resetCupon();
