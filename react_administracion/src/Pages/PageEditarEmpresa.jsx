@@ -154,7 +154,6 @@ function PageEditarEmpresa() {
         error={errors.telefono}
       />
       <Button text="Actualizar" />
-      <pre className="mt-4">{JSON.stringify(watch(), null, 2)}</pre>
     </form>
     <Toaster 
     theme="dark"
